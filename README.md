@@ -13,7 +13,7 @@ The patch changes **three ARM instructions, totaling 10 differing bytes**, in `/
 
 ## Download
 
-[Download the experimental firmware](EXPERIMENTAL_D1-MINI_20251110_fanfix.tar.gz?raw=true)
+[Download the experimental firmware](https://github.com/booteg-cpu/Volcminer-D1-mini/releases/download/v2025.11.10-fanfix.1/EXPERIMENTAL_D1-MINI_20251110_fanfix.tar.gz)
 
 SHA-256:
 
@@ -33,20 +33,9 @@ Use only with the matching D1 Mini hardware and base firmware. Back up the devic
 
 **Long-term reliability and elimination of the user's intermittent incident are not yet established.** The emergency-temperature scenario was not deliberately triggered on hardware. The installed device binary was not independently read back and hashed. The evidence confirms the software defects and short-term operation, not a guarantee for every cause of maximum fan speed.
 
-## Reproduce the patch and tests
+## Release files
 
-Use Python 3.10+ and the exact original vendor archive. The scripts run offline and never connect to or flash a miner.
-
-```sh
-python -m pip install -r requirements.txt
-# Place upgrade_altcoin_VOLCMiner_rootfs_D1-MINI-2025-11-10-13-22-38.tar.gz here.
-python prepare_original.py
-python build_fan_candidate.py
-python package_candidate.py
-python verify_release.py
-```
-
-`prepare_original.py` validates the original archive and extracts only the original cgminer payload. `patch.json` lists the exact instruction edits and binary hashes. The packaging script generates a fresh archive; its gzip timestamp can make its archive hash differ from the published download even when the patched cgminer is identical. Its generated metadata describes an offline build; the physical-test observations are documented above.
+Download the firmware from the GitHub release assets. Build and test scripts have been removed from the current repository. `patch.json` records the exact instruction edits and binary hashes.
 
 Original archive SHA-256:
 `5569cf7ae10df4550b61e59f3060b1ca67bde0551d446a7ea747c3f3bda155b3`

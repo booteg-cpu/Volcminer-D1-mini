@@ -13,7 +13,7 @@
 
 ## 下载
 
-[下载实验性固件](EXPERIMENTAL_D1-MINI_20251110_fanfix.tar.gz?raw=true)
+[下载实验性固件](https://github.com/booteg-cpu/Volcminer-D1-mini/releases/download/v2025.11.10-fanfix.1/EXPERIMENTAL_D1-MINI_20251110_fanfix.tar.gz)
 
 SHA-256：
 
@@ -33,20 +33,9 @@ SHA-256：
 
 **尚未证明长期稳定性，也不能确认用户遇到的偶发故障已彻底消失。** 未在实机上故意触发紧急高温场景，也未从设备回读并校验已安装的程序。当前证据确认了软件缺陷及短期运行情况，不能保证解决所有导致风扇全速的问题。
 
-## 复现方法
+## 发布文件
 
-需要 Python 3.10+ 及完全匹配的厂商原始固件。脚本离线运行，不连接矿机，也不执行刷机。
-
-```sh
-python -m pip install -r requirements.txt
-# 将 upgrade_altcoin_VOLCMiner_rootfs_D1-MINI-2025-11-10-13-22-38.tar.gz 放在此目录。
-python prepare_original.py
-python build_fan_candidate.py
-python package_candidate.py
-python verify_release.py
-```
-
-`prepare_original.py` 校验原始固件，并只提取 cgminer。`patch.json` 记录准确的指令修改和程序校验值。重新打包时，gzip 时间戳可能导致压缩包校验值与下载版本不同，即使补丁后的 cgminer 完全一致。脚本生成的元数据描述离线构建，实机验证情况以本说明为准。
+请从 GitHub 发布页面的附件下载固件。当前仓库已移除构建和测试脚本。`patch.json` 记录准确的指令修改和程序校验值。
 
 原始固件 SHA-256：
 `5569cf7ae10df4550b61e59f3060b1ca67bde0551d446a7ea747c3f3bda155b3`
