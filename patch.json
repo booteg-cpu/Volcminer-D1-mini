@@ -1,0 +1,26 @@
+{
+  "status": "EXPERIMENTAL - 16 ARM tests passed; short physical test on one miner; long-term fix unconfirmed",
+  "upstream_archive_sha256": "5569cf7ae10df4550b61e59f3060b1ca67bde0551d446a7ea747c3f3bda155b3",
+  "original_binary_sha256": "44550a0d560ee08a65c26b4481e680e4fa6bffbee85b0bfa4e29b0f2a26941dd",
+  "candidate_binary_sha256": "b800274a58fb37e886a06afce83ee0404e404ef77b76b8f20db06ed28683709a",
+  "edits": [
+    {
+      "address": "0x893a4",
+      "before": "0230a0c1",
+      "after": "843084c5",
+      "description": "movgt r3,r2 -> strgt r3,[r4,#0x84]"
+    },
+    {
+      "address": "0x893a8",
+      "before": "cc2186c5",
+      "after": "0000a0e1",
+      "description": "strgt r2,[r6,#0x1cc] -> nop"
+    },
+    {
+      "address": "0x89774",
+      "before": "010080e2",
+      "after": "0000a0e1",
+      "description": "add r0,r0,#1 -> nop (restore backup without increment)"
+    }
+  ]
+}

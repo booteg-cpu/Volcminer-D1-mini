@@ -1,0 +1,6 @@
+__pycache__/
+.venv/
+analysis-deps/
+rootfs/
+candidate/
+upgrade_altcoin_VOLCMiner_rootfs_D1-MINI-2025-11-10-13-22-38.tar.gz
