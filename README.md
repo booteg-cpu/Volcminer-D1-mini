@@ -1,8 +1,8 @@
-# Volcminer D1 mini — experimental fan control fix
+# Volcminer D1 mini — experimental fan fix and LED controls
 
 [中文说明](README.zh-CN.md)
 
-An unofficial binary patch for the **D1 Mini / D1 Mini Pre Ethernet** firmware dated **2025-11-10 13:22:38**. It addresses two fan-controller defects reproduced by executing the original ARM instructions in an emulator.
+Unofficial experimental firmware for **D1 Mini / D1 Mini Pre Ethernet**, based on vendor firmware **2025-11-10 13:22:38**. It includes two fan-controller fixes and independent LED controls with settings that survive reboot.
 
 ## What was fixed
 
@@ -11,14 +11,25 @@ An unofficial binary patch for the **D1 Mini / D1 Mini Pre Ethernet** firmware d
 
 It does not change the configured frequency, voltage, memory parameter, pools, temperature thresholds, cooling delay or cooling step. Forced protective 100% operation is retained; this does not mean every protection path has been validated on hardware.
 
+## LED controls
+
+Two switches appear to the left of the language selector, styled to match the Volcminer interface:
+
+- **ASIC LED** controls only the blinking green status indicator. **Off** stops green blinking; **On** restores normal automatic blinking. The red alarm indicator remains automatic. Blue and yellow indicators keep their normal event-driven behavior.
+- **Ethernet LED** switches the Ethernet port indicators on or off without disabling the network connection.
+
+Both settings are saved and automatically restored after reboot. LED switching does not restart mining or change mining settings.
+
 ## Download
 
-[Download the experimental firmware](https://github.com/booteg-cpu/Volcminer-D1-mini/releases/download/v2025.11.10-fanfix.1/EXPERIMENTAL_D1-MINI_20251110_fanfix.tar.gz)
+[Download the experimental firmware with LED controls](https://github.com/booteg-cpu/Volcminer-D1-mini/releases/download/v2025.11.10-fanfix-led.1/EXPERIMENTAL_D1-MINI_20251110_fanfix_led.tar.gz)
+
+[Release notes (English / 中文)](https://github.com/booteg-cpu/Volcminer-D1-mini/releases/tag/v2025.11.10-fanfix-led.1)
 
 SHA-256:
 
 ```text
-2b9c6699571902c70a5b659d33224a1fb55a65cbf5f5a35bb500948a647e9b56
+e0f29ac3db875163aa1560012c66983f8f44b6689787368b9c300ac6493c64cd
 ```
 
 Use only with the matching D1 Mini hardware and base firmware. Back up the device configuration and have a recovery method before updating. The original compile-time version string is preserved, so identify this archive by its checksum. Manufacturer support page: https://volcminer.com/TechnicalSupport
@@ -30,7 +41,9 @@ Use only with the matching D1 Mini hardware and base firmware. Back up the devic
 - During the short hardware check, fan PWM decreased from 50 to 44 and later increased to 52 at a logged temperature of 65 °C. Subsequent dashboard samples showed approximately **2640–2670 RPM**, **61/60 °C PCB temperatures**, and **2.21–2.33 GH/s** with zero rejected shares at those readings.
 - Startup fan warnings occurred, followed by `check_fan_speed OK`; one additional early fan error was logged. No later fan-error recurrence appeared in the inspected current log.
 
-**Long-term reliability and elimination of the user's intermittent incident are not yet established.** The emergency-temperature scenario was not deliberately triggered on hardware. The installed device binary was not independently read back and hashed. The evidence confirms the software defects and short-term operation, not a guarantee for every cause of maximum fan speed.
+- The LED build was installed and reboot-tested on the same device on **2026-10-23**. The written root filesystem image was read back and verified before reboot. Both switches worked after reboot, and the owner physically confirmed that the saved Off settings were restored. Mining continued during LED switching, with accepted shares increasing and the miner process remaining running. Final readings were approximately **2.23 GH/s**, **55/54 °C PCB temperatures**, **2970/2970 RPM**, and **278 accepted / 0 rejected shares**. These are point-in-time readings, not guaranteed performance. Startup power-read and fan warnings occurred before normal operation resumed.
+
+**Long-term reliability and elimination of the user's intermittent incident are not yet established.** The emergency-temperature scenario was not deliberately triggered on hardware. Validation covers one device; the evidence confirms the software defects and observed operation, not a guarantee for every cause of maximum fan speed.
 
 ## Donations
 
